@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+	
+{% block content %}
+
+ 	<div class="content-section">
+ 		<form method="POST" action="">
+
+ 			{{ form.hidden_tag() }}
+
+ 			<fieldset class="form-group">
+
+ 				<legend class="border-bottom mb-4"> Enter a keyword </legend>
+ 				<div class="form-group">
+ 					{{form.keyword.label(class="form-control-label")}}
+ 					{{form.keyword(class="form-control form-control-lg")}}
+ 				</div>
+ 			</fieldset>
+ 			<div class="form-group">
+ 				{{form.submit(class="btn btn-outline-info")}}
+ 			</div>
+ 		</form>
+ 	</div>
+
+{% endblock content %}
