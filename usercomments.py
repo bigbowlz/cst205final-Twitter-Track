@@ -33,12 +33,17 @@ print("----------------------------------")
 '''
 
 #search "en" tweets associated with a specific account (replying to or mentioning that account) and the keyword given, and store the result. items in "text_result" list are strings.
-def get_comments(keyword, account):
+def get_comments(keyword, account, start_t):
     status_results = []
-    if (keyword == "") or (account == ""):
+    if str(type(keyword)) != "<class 'str'>" or str(type(account)) != "<class 'str'>":
         keyword = input("Keyword: ")
-        account = input("User ID of the twitter account you are monitoring (e.g. @CallofDuty): ")
-    for status in tweepy.Cursor(api.search, q = f'{keyword} {account} -filter:retweets', Since="2018-10-00", lang = "en", show_user = True, tweet_mode = "extended").items(100000):
+        account = input("User ID of the twitter account you are monitoring (e.g. CallofDuty): ")
+        start_t = input("Since when do you want to start tracking: ")
+    #filter: mentioning the account
+    for status in tweepy.Cursor(api.search, q = f'{keyword} @{account} -filter:retweets', Since = start_t, lang = "en", show_user = True, tweet_mode = "extended").items(100):
+        status_results.append(status._json)
+    #filter: replying to the account
+    for status in tweepy.Cursor(api.search, q = f'{keyword} to:{account} -filter:retweets', Since = start_t, lang = "en", show_user = True, tweet_mode = "extended").items(100):
         status_results.append(status._json)
 
     #extract and show all the text 
