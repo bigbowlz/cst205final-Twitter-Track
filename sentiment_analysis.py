@@ -22,11 +22,19 @@ class SentimentAnalysis:
         api = tweepy.API(auth)
 
         # input for term to be searched and how many tweets to search
-        searchTerm = input("Enter Keyword/Tag to search about: ")
-        NoOfTerms = int(input("Enter how many tweets to search: "))
+        '''searchTerm = input("Enter Keyword/Tag to search about: ")
+        account = input("User ID of the twitter account you are monitoring (e.g. CallofDuty): ")
+        start_t = input("Since when do you want to start tracking: ")
+        NoOfTerms = int(input("Enter how many tweets to search: "))'''
+
+        searchTerm = "skin"
+        account = "ringofelysium"
+        start_t = "20181111"
+        NoOfTerms = 100
 
         # searching for tweets
-        self.tweets = tweepy.Cursor(api.search, q=searchTerm, lang = "en").items(NoOfTerms)
+        #self.tweets = tweepy.Cursor(api.search, q=searchTerm, lang = "en").items(NoOfTerms)
+        self.tweets = tweepy.Cursor(api.search, q = f'{searchTerm} @{account} -filter:retweets', lang = "en", show_user = True, tweet_mode = "extended").items(NoOfTerms)
 
         # Open/create a file to append data to
         csvFile = open('result.csv', 'a')
