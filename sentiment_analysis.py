@@ -2,6 +2,7 @@ import sys, tweepy, csv, re
 from textblob import TextBlob
 import matplotlib.pyplot as plt
 import twitter_credentials as credentials
+import json
 
 
 class SentimentAnalysis:
@@ -27,15 +28,25 @@ class SentimentAnalysis:
         start_t = input("Since when do you want to start tracking: ")
         NoOfTerms = int(input("Enter how many tweets to search: "))'''
 
-        searchTerm = "skin"
+        searchTerm = "the"
         account = "ringofelysium"
-        start_t = "20181111"
+        start_t = "2018-11-11"
         NoOfTerms = 100
 
         # searching for tweets
         #self.tweets = tweepy.Cursor(api.search, q=searchTerm, lang = "en").items(NoOfTerms)
         self.tweets = tweepy.Cursor(api.search, q = f'{searchTerm} @{account} -filter:retweets', lang = "en", show_user = True, tweet_mode = "extended").items(NoOfTerms)
+        
+        status_results = []
+        for status in tweepy.Cursor(api.search, q = f'{searchTerm} @{account} -filter:retweets', lang = "en", show_user = True, tweet_mode = "extended").items(NoOfTerms):
+            status_results.append(status._json)
 
+        #extract and show all the text 
+        text_results = []
+        for i in range(0,len(status_results)):
+            text_results.append(status_results[i]["full_text"])
+            #print(text_results[i])
+       
         # Open/create a file to append data to
         csvFile = open('result.csv', 'a')
 
@@ -55,11 +66,11 @@ class SentimentAnalysis:
 
 
         # iterating through tweets fetched
-        for tweet in self.tweets:
+        for tweet in range(len(text_results)):
             #Append to temp so that we can store in csv later. I use encode UTF-8
-            self.tweetText.append(self.cleanTweet(tweet.text).encode('utf-8'))
+            self.tweetText.append(self.cleanTweet(text_results[tweet]).encode('utf-8'))
             # print (tweet.text.translate(non_bmp_map))    #print tweet's text
-            analysis = TextBlob(tweet.text)
+            analysis = TextBlob(text_results[tweet])
             # print(analysis.sentiment)  # print tweet's polarity
             polarity += analysis.sentiment.polarity  # adding up polarities to find the average later
 
