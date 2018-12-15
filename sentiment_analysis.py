@@ -23,34 +23,39 @@ class SentimentAnalysis:
         api = tweepy.API(auth)
 
         # input for term to be searched and how many tweets to search
-        '''searchTerm = input("Enter Keyword/Tag to search about: ")
-        account = input("User ID of the twitter account you are monitoring (e.g. CallofDuty): ")
-        start_t = input("Since when do you want to start tracking: ")
-        NoOfTerms = int(input("Enter how many tweets to search: "))'''
+        searchTerm = "skin"
+        '''search_change = input(f'Current keyword on track is {searchTerm}, wanna change the keyword? (Y/N)')
+        while search_change != "N":
+            if search_change == "Y":
+                searchTerm = input("Enter Keyword/Tag to search about: ")
+                search_change = "N"
+            else:
+                search_change = input(f'Please enter Y or N. \nCurrent keyword on track is {searchTerm}, wanna change the keyword? (Y/N)')'''
 
-        searchTerm = "the"
         account = "ringofelysium"
-        start_t = "2018-11-11"
-        NoOfTerms = 100
-
+        '''account_change = input(f'Current account on track is {account}, wanna change the account? (Y/N)')
+        while account_change != "N":
+            if account_change == "Y":
+                account = input("Enter Keyword/Tag to search about: ")
+                account_change = "N"
+            else:
+                account_change = input(f'Please enter Y or N. \nCurrent keyword on track is {account}, wanna change the account? (Y/N)')'''
+        start_t = "2018-10-01"
         # searching for tweets
-        #self.tweets = tweepy.Cursor(api.search, q=searchTerm, lang = "en").items(NoOfTerms)
-        #self.tweets = tweepy.Cursor(api.search, q = f'{searchTerm} @{account} -filter:retweets', lang = "en", show_user = True, tweet_mode = "extended").items(NoOfTerms)
-
         #filter: mentioning the account
         status_results = []
-        for status in tweepy.Cursor(api.search, q = f'{searchTerm} @{account} -filter:retweets', lang = "en", show_user = True, tweet_mode = "extended").items(NoOfTerms):
+        for status in tweepy.Cursor(api.search, q = f'{searchTerm} @{account} -filter:retweets', Since = start_t, lang = "en", tweet_mode = "extended").items(200):
             status_results.append(status._json)
 
         #filter: replying to the account
-        for status in tweepy.Cursor(api.search, q = f'{searchTerm} to:{account} -filter:retweets', lang = "en", show_user = True, tweet_mode = "extended").items(100):
+        for status in tweepy.Cursor(api.search, q = f'{searchTerm} to:{account} -filter:retweets', Since = start_t, lang = "en", tweet_mode = "extended").items(200):
             status_results.append(status._json)
-
+        #print (status_results)
+        
         #extract and show all the text 
         text_results = []
         for i in range(0,len(status_results)):
             text_results.append(status_results[i]["full_text"])
-            #print(text_results[i])
        
         # Open/create a file to append data to
         csvFile = open('result.csv', 'a')
@@ -68,8 +73,9 @@ class SentimentAnalysis:
         wnegative = 0
         snegative = 0
         neutral = 0
+        NoOfTerms = len(text_results)
 
-
+   
         # iterating through tweets fetched
         for tweet in range(len(text_results)):
             #Append to temp so that we can store in csv later. I use encode UTF-8
