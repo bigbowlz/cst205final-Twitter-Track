@@ -32,7 +32,7 @@ class SentimentAnalysis:
             else:
                 search_change = input(f'Please enter Y or N. \nCurrent keyword on track is {searchTerm}, wanna change the keyword? (Y/N)')'''
 
-        account = "ringofelysium"
+        account = "roe_tencent"
         '''account_change = input(f'Current account on track is {account}, wanna change the account? (Y/N)')
         while account_change != "N":
             if account_change == "Y":
@@ -40,15 +40,15 @@ class SentimentAnalysis:
                 account_change = "N"
             else:
                 account_change = input(f'Please enter Y or N. \nCurrent keyword on track is {account}, wanna change the account? (Y/N)')'''
-        start_t = "2018-10-01"
+        start_t = "2018-04-01"
         # searching for tweets
         #filter: mentioning the account
         status_results = []
-        for status in tweepy.Cursor(api.search, q = f'{searchTerm} @{account} -filter:retweets', Since = start_t, lang = "en", tweet_mode = "extended").items(200):
+        for status in tweepy.Cursor(api.search, q = f'{searchTerm} @{account} -filter:retweets', Since = start_t, lang = "en", tweet_mode = "extended").items(2000):
             status_results.append(status._json)
 
         #filter: replying to the account
-        for status in tweepy.Cursor(api.search, q = f'{searchTerm} to:{account} -filter:retweets', Since = start_t, lang = "en", tweet_mode = "extended").items(200):
+        for status in tweepy.Cursor(api.search, q = f'{searchTerm} to:{account} -filter:retweets', Since = start_t, lang = "en", tweet_mode = "extended").items(2000):
             status_results.append(status._json)
         #print (status_results)
         
@@ -169,7 +169,7 @@ class SentimentAnalysis:
         plt.title('How people are reacting on ' + searchTerm + ' by analyzing ' + str(noOfSearchTerms) + ' Tweets.')
         plt.axis('equal')
         plt.tight_layout()
-        plt.show()
+        plt.savefig('sentiment.png')
 
 analysis = SentimentAnalysis()
 analysis.DownloadData()
