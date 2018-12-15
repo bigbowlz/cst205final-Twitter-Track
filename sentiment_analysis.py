@@ -35,10 +35,15 @@ class SentimentAnalysis:
 
         # searching for tweets
         #self.tweets = tweepy.Cursor(api.search, q=searchTerm, lang = "en").items(NoOfTerms)
-        self.tweets = tweepy.Cursor(api.search, q = f'{searchTerm} @{account} -filter:retweets', lang = "en", show_user = True, tweet_mode = "extended").items(NoOfTerms)
-        
+        #self.tweets = tweepy.Cursor(api.search, q = f'{searchTerm} @{account} -filter:retweets', lang = "en", show_user = True, tweet_mode = "extended").items(NoOfTerms)
+
+        #filter: mentioning the account
         status_results = []
         for status in tweepy.Cursor(api.search, q = f'{searchTerm} @{account} -filter:retweets', lang = "en", show_user = True, tweet_mode = "extended").items(NoOfTerms):
+            status_results.append(status._json)
+
+        #filter: replying to the account
+        for status in tweepy.Cursor(api.search, q = f'{searchTerm} to:{account} -filter:retweets', lang = "en", show_user = True, tweet_mode = "extended").items(100):
             status_results.append(status._json)
 
         #extract and show all the text 
