@@ -184,7 +184,7 @@ class SentimentAnalysis:
         else:
             plt.savefig('static/sentiment.png')
         '''
-        plt.savefig('static/sentiment.png')
+        plt.savefig(f'static/sentiment_{self.keyword}.png')
     def getText(self):
         return self.text
     

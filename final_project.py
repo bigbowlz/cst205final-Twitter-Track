@@ -10,11 +10,13 @@ app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 
 
 
+
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/home', methods=['GET', 'POST'])
 def index():
     global analysis
     global tweets
+    global keyword
     form = UserInput()
     
     if form.validate_on_submit():
@@ -35,7 +37,7 @@ def index():
 @app.route('/sentiment')
 def sentiment():
     
-    return render_template("sentiment.html", title = "Sentiments", analysis = analysis)
+    return render_template("sentiment.html", title = "Sentiments", analysis = analysis, keyword = f'sentiment_{keyword}.png')
 
 @app.route('/tweets')
 def tweets():
