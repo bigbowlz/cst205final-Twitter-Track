@@ -1,5 +1,14 @@
 {% extends "layout.html" %}
 	
 {% block content %}
-
+	<div class="content-section">
+		<h1>Sentiment Analysis Results</h1>
+		<table class="table">
+			{% for item in analysis %}
+				<tr>
+					<td>{{item}}</td>
+				</tr>
+			{% endfor %}
+		</table>
+	</div>
 {% endblock content %}

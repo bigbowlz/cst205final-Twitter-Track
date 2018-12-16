@@ -1,5 +1,15 @@
 {% extends "layout.html" %}
 	
 {% block content %}
+	<div class="content-section">
+		<h1>Tweets analyzed</h1>
 
+		<table class="table">
+			{% for item in tweets %}
+				<tr>
+					<td>{{item}}</td>
+				</tr>
+			{% endfor %}
+		</table>
+	</div>
 {% endblock content %}
