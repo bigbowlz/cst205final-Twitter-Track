@@ -3,6 +3,9 @@
 {% block content %}
 	<div class="content-section">
 		<h1>Sentiment Analysis Results</h1>
+
+		<img src="{{url_for('static', filename='sentiment.png')}}" alt="pie chart">
+
 		<table class="table">
 			{% for item in analysis %}
 				<tr>

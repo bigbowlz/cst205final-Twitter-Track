@@ -1,8 +1,7 @@
-import sys, tweepy, csv, re
+import sys, tweepy, csv, re, json, os
 from textblob import TextBlob
 import matplotlib.pyplot as plt
 import twitter_credentials as credentials
-import json
 
 
 class SentimentAnalysis:
@@ -173,11 +172,17 @@ class SentimentAnalysis:
         colors = ['yellowgreen','lightgreen','darkgreen', 'gold', 'red','lightsalmon','darkred']
         patches, texts = plt.pie(sizes, colors=colors, startangle=90)
         plt.legend(patches, labels, loc="best")
-        plt.title('How people are reacting on ' + searchTerm + ' by analyzing ' + str(noOfSearchTerms) + ' Tweets.')
+        plt.title("How people are reacting on '" + searchTerm + "' by analyzing " + str(noOfSearchTerms) + " Tweets.")
         plt.axis('equal')
         plt.tight_layout()
-        plt.savefig('sentiment.png')
-        
+        '''
+        if os.path.exists("static/sentiment.png"):
+            os.remove("static/sentiment.png")
+            plt.savefig('static/sentiment.png')
+        else:
+            plt.savefig('static/sentiment.png')
+        '''
+        plt.savefig('static/sentiment.png')
     def getText(self):
         return self.text
     
