@@ -9,7 +9,7 @@ class SentimentAnalysis:
     def __init__(self, keyword, account, numTweets):
         self.tweets = []
         self.tweetText = []
-        self.result = []
+        self.result = {}
         self.text = []
         self.keyword = keyword
         self.account = account
@@ -124,33 +124,35 @@ class SentimentAnalysis:
         polarity = polarity / NoOfTerms
 
         # printing out data
-        self.result.append("How people are reacting on '" + searchTerm + "' by analyzing " + str(NoOfTerms) + " tweets.")
+        self.result["report_title"] = f'How people are reacting on "{searchTerm}" by analyzing {NoOfTerms} tweets:'
         
         #self.result.append("General Report: ")
 
         if (polarity == 0):
-            self.result.append("General Report: Neutral")
+            self.result["general"] = "General Sentiment: Neutral"
         elif (polarity > 0 and polarity <= 0.3):
-            self.result.append("General Report: Weakly Positive")
+            self.result["general"] = "General Sentiment: Weakly Positive"
         elif (polarity > 0.3 and polarity <= 0.6):
-            self.result.append("General Report: Positive")
+            self.result["general"] = "General Sentiment: Positive"
         elif (polarity > 0.6 and polarity <= 1):
-            self.result.append("General Report: Strongly Positive")
+            self.result["general"] = "General Sentiment: Strongly Positive"
         elif (polarity > -0.3 and polarity <= 0):
-            self.result.append("General Report: Weakly Negative")
+            self.result["general"] = "General Sentiment: Weakly Negative"
         elif (polarity > -0.6 and polarity <= -0.3):
-            self.result.append("General Report: Negative")
+            self.result["general"] = "General Sentiment: Negative"
         elif (polarity > -1 and polarity <= -0.6):
-            self.result.append("General Report: Strongly Negative")
+            self.result["general"] = "General Sentiment: Strongly Negative"
 
-        self.result.append("Detailed Report: ")
-        self.result.append(str(positive) + "% people thought it was positive")
-        self.result.append(str(wpositive) + "% people thought it was weakly positive")
-        self.result.append(str(spositive) + "% people thought it was strongly positive")
-        self.result.append(str(negative) + "% people thought it was negative")
-        self.result.append(str(wnegative) + "% people thought it was weakly negative")
-        self.result.append(str(snegative) + "% people thought it was strongly negative")
-        self.result.append(str(neutral) + "% people thought it was neutral")
+        self.result["de_report"] = "Detailed Report: "
+        r_details = []
+        r_details.append(str(positive) + "% people thought it was positive")
+        r_details.append(str(wpositive) + "% people thought it was weakly positive")
+        r_details.append(str(spositive) + "% people thought it was strongly positive")
+        r_details.append(str(negative) + "% people thought it was negative")
+        r_details.append(str(wnegative) + "% people thought it was weakly negative")
+        r_details.append(str(snegative) + "% people thought it was strongly negative")
+        r_details.append(str(neutral) + "% people thought it was neutral")
+        self.result["report_stat"] = r_details
 
         self.plotPieChart(positive, wpositive, spositive, negative, wnegative, snegative, neutral, searchTerm, NoOfTerms)
 
@@ -172,7 +174,7 @@ class SentimentAnalysis:
         colors = ['yellowgreen','lightgreen','darkgreen', 'gold', 'red','lightsalmon','darkred']
         patches, texts = plt.pie(sizes, colors=colors, startangle=90)
         plt.legend(patches, labels, loc="best")
-        plt.title("How people are reacting on '" + searchTerm + "' by analyzing " + str(noOfSearchTerms) + " Tweets.")
+        plt.title('How people are reacting on "' + searchTerm + '" by analyzing ' + str(noOfSearchTerms) + ' Tweets.')
         plt.axis('equal')
         plt.tight_layout()
         '''

@@ -5,9 +5,11 @@
 		<h1>Sentiment Analysis Results</h1>
 
 		<img src="{{url_for('static', filename='sentiment.png')}}" alt="pie chart">
-
+        <h4>{{ analysis["report_title"] }} </h4>  
+        <p>{{ analysis["general"] }} <br><br></p>
+        <h4>{{ analysis["de_report"] }}</h4>
 		<table class="table">
-			{% for item in analysis %}
+			{% for item in analysis["report_stat"] %}
 				<tr>
 					<td>{{item}}</td>
 				</tr>
