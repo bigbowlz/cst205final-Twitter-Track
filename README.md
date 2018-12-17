@@ -11,11 +11,17 @@ This project requires Python (3.0 +) and a terminal to run.
 1. In the terminal, clone this repository.
 2. In the terminal, install these modules:
     DateTime  (https://pypi.org/project/DateTime/)
+    
     Flask  (http://flask.pocoo.org/docs/1.0/installation/)
+    
     Flask-WTF  (https://flask-wtf.readthedocs.io/en/stable/install.html)
+    
     tweepy  (https://github.com/tweepy/tweepy)
+    
     textblob  (https://textblob.readthedocs.io/en/dev/install.html)
+    
     matplotlib  (https://matplotlib.org/users/installing.html)
+    
 3. In the terminal, if you are using windows, run:
     $env:FLASK_APP = "final_project.py"
     $env:FLASK_DEBUG = "1"
