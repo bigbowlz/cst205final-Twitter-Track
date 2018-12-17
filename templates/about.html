@@ -2,7 +2,14 @@
 	
 {% block content %}
 	<div class="content-section">
-
+        <h3>About QTracker</h3>
+        <p>Q-Tracker is a twitter analysis tool that allows users to keep track of how a keyword is associated with a Twitter account. Users will get a visualized sentiment analysis based on the keyword given, and can download the analysis.</p>
+        
+        <h3>Developers: </h3>
+            <p>Jesus Fernandez: <a href="mailto:jesufernandez@csumb.edu">Send Email</a><br>
+            Wanli Zhou: <a href="mailto:wanliz@middlebury.edu">Send Email</a>
+        </p>
+        
         <p>&nbsp;&nbsp;<a href="{{ url_for('index') }}">Create New Search</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ url_for('sentiment') }}">See Sentiment Analysis</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ url_for('tweets') }}">See Tweets Analyzed</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ url_for('about') }}">About QTracker</a></p>
         
 	</div>
