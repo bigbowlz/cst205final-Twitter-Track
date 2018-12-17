@@ -49,11 +49,11 @@ class SentimentAnalysis:
         # searching for tweets
         #filter: mentioning the account
         status_results = []
-        for status in tweepy.Cursor(api.search, q = f'{searchTerm} @{account} -filter:retweets', Since = start_t, lang = "en", tweet_mode = "extended").items(self.numTweets):
+        for status in tweepy.Cursor(api.search, q = f'{searchTerm} @{account} -filter:retweets', Since = start_t, lang = "en", tweet_mode = "extended").items(self.numTweets/2):
             status_results.append(status._json)
 
         #filter: replying to the account
-        for status in tweepy.Cursor(api.search, q = f'{searchTerm} to:{account} -filter:retweets', Since = start_t, lang = "en", tweet_mode = "extended").items(self.numTweets):
+        for status in tweepy.Cursor(api.search, q = f'{searchTerm} to:{account} -filter:retweets', Since = start_t, lang = "en", tweet_mode = "extended").items(self.numTweets/2):
             status_results.append(status._json)
         #print (status_results)
         
