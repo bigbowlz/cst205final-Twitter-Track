@@ -49,6 +49,9 @@
 	  <div class="row">
 	    <div class="col-md-8">
 	      {% block content %}{% endblock %}
+	      <hr>
+	      
+        <p>&nbsp;&nbsp;<a href="{{ url_for('index') }}">Create New Search</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ url_for('sentiment') }}">See Sentiment Analysis</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ url_for('tweets') }}">See Tweets Analyzed</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ url_for('about') }}">About QTracker</a></p>
 	    </div>
 	    <!--
 	    <div class="col-md-4">

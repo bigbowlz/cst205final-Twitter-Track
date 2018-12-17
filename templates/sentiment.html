@@ -16,7 +16,6 @@
 					</tr>
 				{% endfor %}
 			</table>
-	        <p>&nbsp;&nbsp;<a href="{{ url_for('index') }}">Create New Search</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ url_for('sentiment') }}">See Sentiment Analysis</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ url_for('tweets') }}">See Tweets Analyzed</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ url_for('about') }}">About QTracker</a></p>
 		</div>
 		{% else %}
 	        {{ super() }}
@@ -24,7 +23,6 @@
 	        <h4>&nbsp;&nbsp;Oops, you seem to forget to search something.</h4>
 	        <h4>&nbsp;&nbsp;<a href="{{ url_for('index') }}">Create a new search to see analysis.</a></h4>
 	        <br><br>
-	         <p>&nbsp;&nbsp;<a href="{{ url_for('index') }}">Create New Search</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ url_for('sentiment') }}">See Sentiment Analysis</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ url_for('tweets') }}">See Tweets Analyzed</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ url_for('about') }}">About QTracker</a></p>
 
 	{% endif %}
 
