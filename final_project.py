@@ -49,6 +49,7 @@ def sentiment():
     global analysis
     global condition
     
+    #checking if user has submitted a query
     if len(analysis) > 0:
         condition = True        
     return render_template("sentiment.html", title = "Sentiments", analysis = analysis, file = f'sentiment_{keyword}.png', condition = condition)
@@ -58,13 +59,13 @@ def tweets():
     global analysis
     global condition
     
+    #checking if user has submitted a query
     if len(analysis) > 0:
         condition = True
     return render_template("tweets.html", title = "Tweets", tweets = tweets, condition = condition)
 
 @app.route('/about')
 def about():
-    
     return render_template("about.html", title = "About")
 
 if __name__ == '__main__':

@@ -156,8 +156,6 @@ class SentimentAnalysis:
 
         self.plotPieChart(positive, wpositive, spositive, negative, wnegative, snegative, neutral, searchTerm, NoOfTerms)
 
-
-
     def cleanTweet(self, tweet):
         # Remove Links, Special Characters etc from tweet
         return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t]) | (\w +:\ / \ / \S +)", " ", tweet).split())
@@ -167,6 +165,7 @@ class SentimentAnalysis:
         temp = 100 * float(part) / float(whole)
         return format(temp, '.2f')
     
+    # Creating and saving a visualized analysis (.png) to /static
     def plotPieChart(self, positive, wpositive, spositive, negative, wnegative, snegative, neutral, searchTerm, noOfSearchTerms):
         labels = ['Positive [' + str(positive) + '%]', 'Weakly Positive [' + str(wpositive) + '%]','Strongly Positive [' + str(spositive) + '%]', 'Neutral [' + str(neutral) + '%]',
                   'Negative [' + str(negative) + '%]', 'Weakly Negative [' + str(wnegative) + '%]', 'Strongly Negative [' + str(snegative) + '%]']
@@ -177,14 +176,8 @@ class SentimentAnalysis:
         plt.title('How people are reacting on "' + searchTerm + '" by analyzing ' + str(noOfSearchTerms) + ' Tweets.')
         plt.axis('equal')
         plt.tight_layout()
-        '''
-        if os.path.exists("static/sentiment.png"):
-            os.remove("static/sentiment.png")
-            plt.savefig('static/sentiment.png')
-        else:
-            plt.savefig('static/sentiment.png')
-        '''
         plt.savefig(f'static/sentiment_{self.keyword}.png')
+        
     def getText(self):
         return self.text
     
