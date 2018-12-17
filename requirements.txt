@@ -1,0 +1,7 @@
+You need to install the following modules in the terminal to run the application:
+DateTime  (https://pypi.org/project/DateTime/)
+Flask  (http://flask.pocoo.org/docs/1.0/installation/)
+Flask-WTF  (https://flask-wtf.readthedocs.io/en/stable/install.html)
+tweepy  (https://github.com/tweepy/tweepy)
+textblob  (https://textblob.readthedocs.io/en/dev/install.html)
+matplotlib  (https://matplotlib.org/users/installing.html)
