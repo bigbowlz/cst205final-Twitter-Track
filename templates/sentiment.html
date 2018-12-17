@@ -1,10 +1,13 @@
 {% extends "layout.html" %}
-	
-{% block content %}
-	<div class="content-section">
-		<h1>Sentiment Analysis Results</h1>
+{% block head %}
+{% endblock %}
 
-		<img src="{{url_for('static', filename = keyword)}}" alt="pie chart">
+{% block content %}
+
+        <div class="content-section">
+		<h1>Sentiment Analysis Results</h1>
+        
+		<img src="{{url_for('static', filename = file)}}" alt="pie chart">
         <h4>{{ analysis["report_title"] }} </h4>  
         <p>{{ analysis["general"] }} <br><br></p>
         <h4>{{ analysis["de_report"] }}</h4>
@@ -17,6 +20,8 @@
 		</table>
         <p>&nbsp;&nbsp;<a href="{{ url_for('index') }}">Create New Search</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ url_for('sentiment') }}">See Sentiment Analysis</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ url_for('tweets') }}">See Tweets Analyzed</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ url_for('about') }}">About QTracker</a></p>
 	</div>
+
+	
 {% endblock content %}
 
       
