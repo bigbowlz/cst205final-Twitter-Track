@@ -1,25 +1,32 @@
 {% extends "layout.html" %}
-{% block head %}
-{% endblock %}
 
 {% block content %}
+		{% if condition %}
+	    <div class="content-section">
+			<h1>Sentiment Analysis Results</h1>
+	        
+			<img src="{{url_for('static', filename = file)}}" alt="pie chart">
+	        <h4>{{ analysis["report_title"] }} </h4>  
+	        <p>{{ analysis["general"] }} <br><br></p>
+	        <h4>{{ analysis["de_report"] }}</h4>
+			<table class="table">
+				{% for item in analysis["report_stat"] %}
+					<tr>
+						<td>{{item}}</td>
+					</tr>
+				{% endfor %}
+			</table>
+	        <p>&nbsp;&nbsp;<a href="{{ url_for('index') }}">Create New Search</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ url_for('sentiment') }}">See Sentiment Analysis</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ url_for('tweets') }}">See Tweets Analyzed</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ url_for('about') }}">About QTracker</a></p>
+		</div>
+		{% else %}
+	        {{ super() }}
+	        <br>
+	        <h4>&nbsp;&nbsp;Oops, you seem to forget to search something.</h4>
+	        <h4>&nbsp;&nbsp;<a href="{{ url_for('index') }}">Create a new search to see analysis.</a></h4>
+	        <br><br>
+	         <p>&nbsp;&nbsp;<a href="{{ url_for('index') }}">Create New Search</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ url_for('sentiment') }}">See Sentiment Analysis</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ url_for('tweets') }}">See Tweets Analyzed</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ url_for('about') }}">About QTracker</a></p>
 
-        <div class="content-section">
-		<h1>Sentiment Analysis Results</h1>
-        
-		<img src="{{url_for('static', filename = file)}}" alt="pie chart">
-        <h4>{{ analysis["report_title"] }} </h4>  
-        <p>{{ analysis["general"] }} <br><br></p>
-        <h4>{{ analysis["de_report"] }}</h4>
-		<table class="table">
-			{% for item in analysis["report_stat"] %}
-				<tr>
-					<td>{{item}}</td>
-				</tr>
-			{% endfor %}
-		</table>
-        <p>&nbsp;&nbsp;<a href="{{ url_for('index') }}">Create New Search</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ url_for('sentiment') }}">See Sentiment Analysis</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ url_for('tweets') }}">See Tweets Analyzed</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ url_for('about') }}">About QTracker</a></p>
-	</div>
+	{% endif %}
 
 	
 {% endblock content %}

@@ -46,9 +46,12 @@ def index():
 @app.route('/sentiment')
 def sentiment():
     global keyword
-    #if (len(analysis) > 0) == False:
-        #keyword = 0        
-    return render_template("sentiment.html", title = "Sentiments", analysis = analysis, file = f'sentiment_{keyword}.png')
+    global analysis
+    global condition
+    
+    if len(analysis) > 0:
+        condition = True        
+    return render_template("sentiment.html", title = "Sentiments", analysis = analysis, file = f'sentiment_{keyword}.png', condition = condition)
 
 @app.route('/tweets')
 def tweets():
