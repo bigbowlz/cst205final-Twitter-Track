@@ -8,6 +8,7 @@ import os
 analysis = []
 tweets = []
 keyword = ""
+condition = False
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 
@@ -51,8 +52,12 @@ def sentiment():
 
 @app.route('/tweets')
 def tweets():
+    global analysis
+    global condition
     
-    return render_template("tweets.html", title = "Tweets", tweets = tweets)
+    if len(analysis) > 0:
+        condition = True
+    return render_template("tweets.html", title = "Tweets", tweets = tweets, condition = condition)
 
 @app.route('/about')
 def about():
