@@ -7,6 +7,7 @@ import os
 
 analysis = []
 tweets = []
+keyword = ""
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 
@@ -43,6 +44,7 @@ def index():
 
 @app.route('/sentiment')
 def sentiment():
+    global keyword
     #if (len(analysis) > 0) == False:
         #keyword = 0        
     return render_template("sentiment.html", title = "Sentiments", analysis = analysis, file = f'sentiment_{keyword}.png')
